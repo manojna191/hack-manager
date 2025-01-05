@@ -16,12 +16,12 @@ async function dbConnect(): Promise<void> {
 
   try {
     const dbConn = await mongoose.connect(mongoDbUri || '')
-    connection.isConnected = dbConn.connections[0].readyState;
+    connection.isConnected = dbConn.connections[0].readyState
 
     console.log('DB connected successfully')
   } catch (error) {
-      console.log('Database connection failed error: ', error)
-      process.exit(1)
+    console.log('Database connection failed error: ', error)
+    process.exit(1)
   }
 }
 

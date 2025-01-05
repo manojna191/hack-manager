@@ -15,6 +15,7 @@ export default function Home() {
   return (
     <div>
       <h1>Hack Manager</h1>
+      <h4>Hack you way around</h4>
       <Link href="/register">Register</Link>
     </div>
   )
