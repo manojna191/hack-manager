@@ -3,12 +3,13 @@ import { useState } from 'react'
 import React from 'react'
 import { IHackathon } from '@/models/Hackathon'
 
-const Register: React.FC<{}> = () => {
+const RegisterHack: React.FC<{}> = () => {
   const router = useRouter()
 
   const [hackathonName, setHackathonName] = useState<string>('')
   const [projectName, setProjectName] = useState<string>('')
   const [leaderEmail, setLeaderEmail] = useState<string>('')
+  const [username, setUsername] = useState<string>('')
   const [hackathonUri, setHackathonUri] = useState<string>('')
   const [teamMatesEmails, setTeamMatesEmails] = useState<string[]>(Array(0).fill(''))
   const [githubUri, setGithubUri] = useState<string>('')
@@ -77,15 +78,15 @@ const Register: React.FC<{}> = () => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault()
-    if (hackathonName === '' || projectName === '' || leaderEmail === '') {
+    if (hackathonName === '' || projectName === '' || leaderEmail === '' || username === '') {
       setCheck(false)
-      console.log('we are here !!!!!!!')
       return
     }
     const hackathonData: IHackathon = {
       hackathonName,
       projectName,
       leaderEmail,
+      username,
       hackathonUri,
       teamMatesEmails,
       githubUri,
@@ -94,8 +95,6 @@ const Register: React.FC<{}> = () => {
       endDate,
       submissionDeadline,
     }
-
-    console.log('step 1')
 
     const response = await fetch('/api/hackathon', {
       method: 'POST',
@@ -113,8 +112,8 @@ const Register: React.FC<{}> = () => {
 
     setCheck(true)
     const currentState = history.state
-    history.replaceState(currentState, '', `/hackathon/${hackathonName}`)
-    router.push(`/hackathon/${hackathonName}`)
+    history.replaceState(currentState, '', `/hackathon/${username}/${hackathonName}`)
+    router.push(`/hackathon/${username}/${hackathonName}`)
 
     console.log('step3')
   }
@@ -122,6 +121,8 @@ const Register: React.FC<{}> = () => {
   return (
     <div>
       <form>
+        <p>Enter Username</p>
+        <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
         <p>Hackathon Name</p>
         <input
           type="text"
@@ -184,4 +185,4 @@ const Register: React.FC<{}> = () => {
   )
 }
 
-export default Register
+export default RegisterHack

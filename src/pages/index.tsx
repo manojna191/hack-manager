@@ -16,7 +16,7 @@ export default function Home() {
     <div>
       <h1>Hack Manager</h1>
       <h4>Hack you way around</h4>
-      <Link href="/register">Register</Link>
+      <Link href="/registerHack">Register</Link>
     </div>
   )
 }
